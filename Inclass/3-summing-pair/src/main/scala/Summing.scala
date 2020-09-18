@@ -2,7 +2,7 @@ import scala.collection.mutable
 
 object Summing extends App {
 
-  def sumPairList(xs: List[(Int, Int)]): Int  = {
+  def sumPairList(xs: List[(Int, Int)]): Int = {
     var sum: Int = 0
     xs.foreach(x => sum = sum + x._1 + x._2)
     sum
@@ -31,7 +31,7 @@ object Summing extends App {
     ans
   }
 
-  val test: List[(Int, Int)] = List((1, 2),(2, 3),(3, 4),(4, 5))
+  val test: List[(Int, Int)] = List((1, 2), (2, 3), (3, 4), (4, 5))
 
   println(sumPairList(test))
   println(firsts(test))
