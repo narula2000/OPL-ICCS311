@@ -8,12 +8,11 @@ object SummingRec extends App {
 
   def sumPairList(xs: List[(Int, Int)]): Int = {
     @tailrec
-    def inner(xs: List[(Int, Int)], accum: Int): Int = {
+    def inner(xs: List[(Int, Int)], accum: Int): Int =
       xs match {
         case x :: tail => inner(tail, accum + x._1 + x._2)
-        case Nil       => accum
+        case Nil => accum
       }
-    }
     inner(xs, 0)
   }
 
@@ -22,13 +21,11 @@ object SummingRec extends App {
     @tailrec
     def inner(
         xs: List[(Int, Int)],
-        accum: mutable.ListBuffer[Int]
-    ): mutable.ListBuffer[Int] = {
+        accum: mutable.ListBuffer[Int]): mutable.ListBuffer[Int] =
       xs match {
         case x :: tail => inner(tail, accum += x._1)
-        case Nil       => accum
+        case Nil => accum
       }
-    }
     inner(xs, list).toList
   }
 
@@ -37,13 +34,11 @@ object SummingRec extends App {
     @tailrec
     def inner(
         xs: List[(Int, Int)],
-        accum: mutable.ListBuffer[Int]
-    ): mutable.ListBuffer[Int] = {
+        accum: mutable.ListBuffer[Int]): mutable.ListBuffer[Int] =
       xs match {
         case x :: tail => inner(tail, accum += x._2)
-        case Nil       => accum
+        case Nil => accum
       }
-    }
     inner(xs, list).toList
   }
 
