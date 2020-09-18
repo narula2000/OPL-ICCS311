@@ -3,15 +3,22 @@ import scala.collection.mutable
 
 object SummingRec extends App {
   /*
-   * Got recursion code from Stack-overflow: https://stackoverflow.com/questions/12496959/summing-values-in-a-list
-   */
+    * In-class with recursion
+    * Got recursion code from Stack-overflow: https://stackoverflow.com/questions/12496959/summing-values-in-a-list
+  */
+
+  def sumList(xs: List[Int]): Int = {
+    var sum = 0
+    xs.foreach(x => sum += x)
+    sum
+  }
 
   def sumPairList(xs: List[(Int, Int)]): Int = {
     @tailrec
-    def inner(xs: List[(Int, Int)], accum: Int): Int =
+    def inner(xs: List[(Int, Int)], sum: Int): Int =
       xs match {
-        case x :: tail => inner(tail, accum + x._1 + x._2)
-        case Nil => accum
+        case head :: tail => inner(tail, sum + head._1 + head._2)
+        case Nil => sum
       }
     inner(xs, 0)
   }
@@ -21,10 +28,10 @@ object SummingRec extends App {
     @tailrec
     def inner(
         xs: List[(Int, Int)],
-        accum: mutable.ListBuffer[Int]): mutable.ListBuffer[Int] =
+        sum: mutable.ListBuffer[Int]): mutable.ListBuffer[Int] =
       xs match {
-        case x :: tail => inner(tail, accum += x._1)
-        case Nil => accum
+        case head :: tail => inner(tail, sum += head._1)
+        case Nil => sum
       }
     inner(xs, list).toList
   }
@@ -34,29 +41,22 @@ object SummingRec extends App {
     @tailrec
     def inner(
         xs: List[(Int, Int)],
-        accum: mutable.ListBuffer[Int]): mutable.ListBuffer[Int] =
+        sum: mutable.ListBuffer[Int]): mutable.ListBuffer[Int] =
       xs match {
-        case x :: tail => inner(tail, accum += x._2)
-        case Nil => accum
+        case head :: tail => inner(tail, sum += head._2)
+        case Nil => sum
       }
     inner(xs, list).toList
   }
 
   def pairSumList(xs: List[(Int, Int)]): (Int, Int) = {
-    val x1: List[Int] = firsts(xs)
-    val x2: List[Int] = seconds(xs)
-    var sumX1: Int = 0
-    var sumX2: Int = 0
-    x1.foreach(x => sumX1 = sumX1 + x)
-    x2.foreach(x => sumX2 = sumX2 + x)
-    val ans: (Int, Int) = (sumX1, sumX2)
-    ans
+    (sumList(firsts(xs)), sumList(seconds(xs)))
   }
 
   val test: List[(Int, Int)] = List((1, 2), (2, 3), (3, 4), (4, 5))
 
-  println(sumPairList(test))
-  println(firsts(test))
-  println(seconds(test))
-  println(pairSumList(test))
+  println(sumPairList(test) + " == 24")
+  println(firsts(test) + " == (1, 2, 3, 4)")
+  println(seconds(test) + " == (2, 3, 4, 5)")
+  println(pairSumList(test) + " == (10, 14)")
 }
