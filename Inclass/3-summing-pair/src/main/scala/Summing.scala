@@ -1,4 +1,5 @@
 import scala.collection.mutable
+
 object Summing extends App {
 
   def sumPairList(xs: List[(Int, Int)]): Int  = {
