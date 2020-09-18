@@ -1,6 +1,6 @@
 import scala.math._
 
-object Main extends App {
+object ComputeE extends App {
   /*
     * Arjan code fro computing euler number e
   */
