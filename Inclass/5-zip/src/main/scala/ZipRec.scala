@@ -1,4 +1,5 @@
 import scala.collection.mutable
+import scala.annotation.tailrec
 
 object ZipRec extends App {
 
@@ -12,6 +13,7 @@ object ZipRec extends App {
   def unzip(zipped: List[(Int, Int)]): (List[Int], List[Int]) = {
     var a = new mutable.ListBuffer[Int]()
     var b = new mutable.ListBuffer[Int]()
+    @tailrec
     def inner(
         xs: List[(Int, Int)],
         a: mutable.ListBuffer[Int],

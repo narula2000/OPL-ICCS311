@@ -1,7 +1,9 @@
 import scala.collection.mutable
+import scala.annotation.tailrec
 
 object Fib extends App {
 
+  @tailrec
   def find(xs: List[(Int, String)], key: Int): Option[String] =
     xs match {
       case head :: tail =>
@@ -11,6 +13,7 @@ object Fib extends App {
     }
 
   def rev(xs: List[Int]): List[Int] = {
+    @tailrec
     def revRec(xs: List[Int], list: mutable.ListBuffer[Int]): List[Int] =
       xs match {
         case head :: next => revRec(next, list.prepend(head))
@@ -22,6 +25,7 @@ object Fib extends App {
   }
 
   def fib(n: Int): Long = {
+    @tailrec
     def fibTail(n: Int, first: Int, second: Int): Int =
       n match {
         case 0 => first
