@@ -24,6 +24,18 @@ object Fib extends App {
     revRec(xs, list)
   }
 
+  def revConcat(xs: List[Int]): List[Int] = {
+    @tailrec
+    def revRec(xs: List[Int], list: List[Int]): List[Int] =
+      xs match {
+        case head :: next => revRec(next, List(head) ::: list)
+        case Nil => list
+      }
+
+    var list = List()
+    revRec(xs, list)
+  }
+
   def fib(n: Int): Long = {
     @tailrec
     def fibTail(n: Int, first: Int, second: Int): Int =
@@ -41,6 +53,7 @@ object Fib extends App {
   println(find(testFind, 2) + " == 2")
   println(find(testFind, 3) + " == 3")
   println(find(testFind, 4) + " == None")
-  println(rev(testRev) + " == List(6, 5, 4, 3, 2, 1)")
+  //println(rev(testRev) + " == List(6, 5, 4, 3, 2, 1)")
+  println(revConcat(testRev) + " == List(6, 5, 4, 3, 2, 1)")
   println(fib(8) + " == 21")
 }
