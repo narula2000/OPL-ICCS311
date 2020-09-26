@@ -1,5 +1,9 @@
 object TurnIt extends App {
 
+  /*
+   * Take head of all list and make a list then it concat to its tail
+   * of all the list and send it back hence you get a diagonal flip
+   */
   def transpose(A: List[List[Int]]): List[List[Int]] =
     if (A.head.isEmpty)
       Nil
