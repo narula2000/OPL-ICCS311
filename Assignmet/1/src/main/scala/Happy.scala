@@ -2,7 +2,7 @@ import scala.math.pow
 
 object Happy extends App {
 
-  def sumOfDigitsSquared(n: Int) = {
+  def sumOfDigitsSquared(n: Int): Int = {
     var ans: Int = 0
     n.toString().map(x => ans += pow(x.asDigit, 2).toInt)
     ans
@@ -16,14 +16,12 @@ object Happy extends App {
     }
 
   def kThHappy(k: Int): Int = {
-    var happy: Int = 0
-    var iter: Int = 0
-    while (happy != k) {
-      iter += 1
-      if (isHappy(iter))
-        happy += 1
-    }
-    iter
+    def inner(k: Int, happy: Int, iter: Int): Int =
+      if (k != happy)
+        if (isHappy(iter)) inner(k, happy + 1, iter + 1)
+        else inner(k, happy, iter + 1)
+      else iter - 1
+    inner(k, 0, 1)
   }
 
   // println(sumOfDigitsSquared(145) + " == 42")
