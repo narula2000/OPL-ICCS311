@@ -1,7 +1,8 @@
 trait Expr {
-  def +(that: Expr) = {}
-  def *(that: Expr) = {}
-  def uanry_- = {}
+  def +(that: Expr) = Sum(this, that)
+  def *(that: Expr) = Prod(this, that)
+  def uanry_- = Negate(this)
+  def ~(that: Expr) = Negate(this)
   def toVal(implicit ctx: Map[String, Double]): Double
 }
 
@@ -27,3 +28,11 @@ case class Prod(e1: Expr, e2: Expr) extends Expr {
   override def toVal(implicit ctx: Map[String, Double]): Double =
     e1.toVal * e2.toVal
 }
+
+// object Main extends App {
+// val x = Var("x")
+// val ex = (x + Constant(5)) * x + Constant(11) * x
+// ex.toVal(Map("x" -> 2.0))
+// implicit val ctx: Map[String, Double] = Map("x" -> 2.0)
+// println(ex.toVal)
+// }

@@ -1,7 +1,7 @@
 trait Expr {
-  def +(that: Expr) = {}
-  def *(that: Expr) = {}
-  def uanry_- = {}
+  def +(that: Expr) = Sum(this, that)
+  def *(that: Expr) = Prod(this, that)
+  def uanry_- = Negate(this)
   def toVal(implicit ctx: Map[String, Double]): Double
 }
 
