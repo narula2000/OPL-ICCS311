@@ -53,12 +53,12 @@ case class Div(e1: Expr, e2: Expr) extends Expr {
     }
 }
 
-object Main extends App {
-  val x = Var("x")
-  val ex = ((x + Constant(5)) * x + Constant(11) * x)
-  val nEx = ex.uanry_-
-  ex.toVal(Map("x" -> 2.0))
-  implicit val ctx: Map[String, Double] = Map("x" -> 2.0)
-  println(nEx.toVal)
-  println(ex.uanry_~.toVal)
-}
+// object Main extends App {
+// val x = Var("x")
+// val ex = ((x + Constant(5)) * x + Constant(11) * x)
+// val nEx = ex.uanry_-
+// ex.toVal(Map("x" -> 2.0))
+// implicit val ctx: Map[String, Double] = Map("x" -> 2.0)
+// println(nEx.toVal)
+// println(ex.uanry_~.toVal)
+// }
