@@ -8,7 +8,7 @@ trait Expr {
 
 case class Var(name: String) extends Expr {
   override def toVal(implicit ctx: Map[String, Double]): Double =
-    name.toString()
+    ctx.getOrElse(name, 0)
 }
 
 case class Constant(n: Double) extends Expr {
