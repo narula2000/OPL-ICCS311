@@ -38,7 +38,18 @@ case class Negate(e: Expr) extends Expr {
 
 case class LogNeg(e: Expr) extends Expr {
   override def toVal(implicit ctx: Map[String, Double]): Double =
-    -1.0 * (e.toVal + 1.0)
+    /*
+     * Neg(y) = -1 * y
+     * Neg(y) = flip(y) + 1
+     * Neg(y) - 1 = flip(y)
+     * -1 * y - 1 = flip(y) // for max Double
+     *  -1 * (y + 1) = flip(y) // for min Double
+     */
+    // -1.0 * (e.toVal + 1.0) this might cause over flow max(+sign) + 1
+    // (-1.0 * e.toVal) - 1.0 this might cause over flow -(min(-sign)) > max(+sign)
+    if (scala.Double.MaxValue == e.toVal) (-1.0 * e.toVal) - 1.0
+    else if (scala.Double.MinValue == e.toVal) -1.0 * (e.toVal + 1.0)
+    else -1.0 * (e.toVal + 1.0)
 }
 
 case class Div(e1: Expr, e2: Expr) extends Expr {
