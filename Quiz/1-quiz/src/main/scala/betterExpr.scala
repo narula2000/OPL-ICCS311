@@ -37,7 +37,7 @@ case class Negate(e: Expr) extends Expr {
 }
 
 case class LogNeg(e: Expr) extends Expr {
-  override def toVal(implicit ctx: Map[String, Double]): Double =
+  override def toVal(implicit ctx: Map[String, Double]): Double = {
     /*
      * Neg(y) = -1 * y
      * Neg(y) = flip(y) + 1
@@ -47,9 +47,35 @@ case class LogNeg(e: Expr) extends Expr {
      */
     // -1.0 * (e.toVal + 1.0) this might cause over flow max(+sign) + 1
     // (-1.0 * e.toVal) - 1.0 this might cause over flow -(min(-sign)) > max(+sign)
-    if (scala.Double.MaxValue == e.toVal) (-1.0 * e.toVal) - 1.0
-    else if (scala.Double.MinValue == e.toVal) -1.0 * (e.toVal + 1.0)
-    else -1.0 * (e.toVal + 1.0)
+    // if (scala.Double.MaxValue == e.toVal) (-1.0 * e.toVal) - 1.0
+    // else if (scala.Double.MinValue == e.toVal) -1.0 * (e.toVal + 1.0)
+    // else -1.0 * (e.toVal + 1.0)
+    // I have tried all these then reliased that all Double can be decimal
+    // and I also know it use Double 64 bit IEEE 754 double-precision float
+    // Hence i decided to change value to binary and then flip it and
+    // return the double value
+    // Function to flip bit
+    def flip(i: Char) = {
+      if (i == '1') '0'
+      else if (i == '0') '1'
+      else '3'
+    }
+    // Create list of binary for flipped bits
+    val buf = new StringBuilder
+    // Flipping the bits with java help
+    val binary =
+      java.lang.Long.toBinaryString(
+        java.lang.Double.doubleToRawLongBits(e.toVal)
+      )
+    println(binary)
+    binary.foreach(i => buf += flip(i.toChar)) // Flipping all bits
+    println(buf.toString())
+    // Combine all bits and Change back to Double with Java help
+    val answer = java.lang.Double.longBitsToDouble(
+      new java.math.BigInteger(buf.toString(), 2).longValue()
+    )
+    answer
+  }
 }
 
 case class Div(e1: Expr, e2: Expr) extends Expr {
@@ -68,8 +94,9 @@ case class Div(e1: Expr, e2: Expr) extends Expr {
 // val x = Var("x")
 // val ex = ((x + Constant(5)) * x + Constant(11) * x)
 // val nEx = ex.uanry_-
-// ex.toVal(Map("x" -> 2.0))
-// implicit val ctx: Map[String, Double] = Map("x" -> 2.0)
+// val dp = Constant(3)
+// ex.toVal(Map("x" -> 3.0))
+// implicit val ctx: Map[String, Double] = Map("x" -> 3.0)
 // println(nEx.toVal)
-// println(ex.uanry_~.toVal)
+// println(dp.uanry_~.toVal)
 // }
