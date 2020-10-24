@@ -63,10 +63,11 @@ case class LogNeg(e: Expr) extends Expr {
     // Create list of binary for flipped bits
     val buf = new StringBuilder
     // Flipping the bits with java help
-    val binary =
+    var binary =
       java.lang.Long.toBinaryString(
         java.lang.Double.doubleToRawLongBits(e.toVal)
       )
+    if (e.toVal > 0) binary = '0' + binary // This was added for sign bit
     println(binary)
     binary.foreach(i => buf += flip(i.toChar)) // Flipping all bits
     println(buf.toString())
