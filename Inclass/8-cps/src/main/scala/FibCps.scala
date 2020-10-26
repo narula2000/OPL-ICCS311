@@ -4,11 +4,11 @@ case object Empty extends Tree
 
 object FibCps extends App {
   def fib(n: Int) = {
-    def fibCps(n: Int, c: Int => Int): Int =
+    def fibCps(n: Int, C: Int => Int): Int =
       n match {
-        case 0 => c(0)
-        case 1 => c(1)
-        case _ => fibCps(n - 1, (m: Int) => fibCps(n - 2, (o: Int) => c(m + o)))
+        case 0 => C(0)
+        case 1 => C(1)
+        case _ => fibCps(n - 1, (m: Int) => fibCps(n - 2, (o: Int) => C(m + o)))
       }
     fibCps(n, ((x: Int) => x))
   }

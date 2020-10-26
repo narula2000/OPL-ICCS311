@@ -61,7 +61,7 @@ case class LogNeg(e: Expr) extends Expr {
       else '3'
     }
     // Create list of binary for flipped bits
-    val buf = new StringBuilder
+    val buffer = new StringBuilder
     // Flipping the bits with java help
     var binary =
       java.lang.Long.toBinaryString(
@@ -69,11 +69,11 @@ case class LogNeg(e: Expr) extends Expr {
       )
     if (e.toVal > 0) binary = '0' + binary // This was added for sign bit
     println(binary)
-    binary.foreach(i => buf += flip(i.toChar)) // Flipping all bits
-    println(buf.toString())
+    binary.map(c => buffer += flip(c.toChar)) // Flipping all bits
+    println(buffer.toString())
     // Combine all bits and Change back to Double with Java help
     val answer = java.lang.Double.longBitsToDouble(
-      new java.math.BigInteger(buf.toString(), 2).longValue()
+      new java.math.BigInteger(buffer.toString(), 2).longValue()
     )
     answer
   }
