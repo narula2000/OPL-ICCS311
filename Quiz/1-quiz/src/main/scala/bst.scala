@@ -1,9 +1,5 @@
-trait Tree
-case class Node(left: Tree, key: Int, right: Tree) extends Tree
-case object Empty extends Tree
-
-object bst extends App {
-  def walkCPS(tree: Tree): List[Int] = {
+class BinaryTree[T <: AnyVal] (val rootNode: Node) extends Tree {
+  def walkCPS(): List[Int] = {
     def walker(tree: Tree, C: List[Int] => List[Int]): List[Int] =
       tree match {
         case Empty => C(Nil)
@@ -15,15 +11,22 @@ object bst extends App {
             }
           )
       }
-    walker(tree, (f: List[Int]) => f)
+    walker(this.rootNode, (f: List[Int]) => f)
   }
-
-  // val tree = Node(
-  // Node(Empty, 2, Empty),
-  // 5,
-  // Node(Node(Empty, 6, Empty), 7, Node(Empty, 9, Empty))
-  // )
-//
-  // println(walkPreorder(tree))
 }
 
+trait Tree
+case class Node(left: Tree, key: Int, right: Tree) extends Tree
+case object Empty extends Tree
+
+object Main extends App {
+  val tree = new BinaryTree[Int](
+    Node(
+      Node(Empty, 2, Empty),
+      5,
+      Node(Node(Empty, 6, Empty), 7, Node(Empty, 9, Empty))
+    )
+  )
+
+  println(tree.walkCPS())
+}
