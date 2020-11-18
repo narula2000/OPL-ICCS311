@@ -1,0 +1,11 @@
+[[bin]]
+name = "mining"
+path = "src/mining.rs"
+
+[package]
+name = "mining"
+version = "0.1.0"
+
+[dependencies]
+rayon = "~1.0"
+chashmap = "~2.2"

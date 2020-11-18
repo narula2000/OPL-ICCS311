@@ -1,0 +1,10 @@
+[package]
+name = "crawler"
+version = "0.1.0"
+
+[dependencies]
+rayon = "~1.0"
+chashmap = "~2.2"
+reqwest = "~0.9"
+select = "~0.4"
+url = "~1.7"

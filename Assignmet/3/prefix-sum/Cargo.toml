@@ -1,0 +1,10 @@
+[[bin]]
+name = "prefix-sum"
+path = "src/prefixsum.rs"
+
+[package]
+name = "prefix-sum"
+version = "0.1.0"
+
+[dependencies]
+rayon = "~1.0"
