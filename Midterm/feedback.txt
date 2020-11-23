@@ -1,0 +1,25 @@
+1a) [5/5]
+1b) [5/5]
+1c) [6/6]
+1d) [8/8]
+1e) [6/6]
+
+2a) [5/5]
+2b) [5/5]
+2c) [5/5]
+
+3a) [5/5]
+3b) [5/5]
+3c) [5/5]
+3d) [5/5]
+3e) [5/5]
+3f) [4/5] --> This should restrict the type to Ordering
+3g) [5/5]
+
+4a) [5/5]
+4b) [2/2]
+4c) [1/2] --> This evals to a function
+4d) [2/2]
+4e) [2/2]
+4f) [1/2] --> This should be -30
+4g) [4/5] --> What are the two funcs there? Are they the same func?
