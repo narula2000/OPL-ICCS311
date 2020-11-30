@@ -1,7 +1,17 @@
 object Prime extends App {
-  val primes: Stream[Int] = 2 #:: Stream
-    .from(3)
-    .filter(i => primes.takeWhile(k => k * k <= i).forall(k => i % k > 0))
+  def factorial(n: Int): Long = {
+    def loop(n: Int, accum: Long): Long = {
+      if (n <= 1) accum
+      else loop(n - 1, n * accum)
+    }
+    loop(n, 1)
+  }
 
-  println(primes.take(10).toList)
+  def genPrime(n: Int): LazyList[Int] = {
+    def checkPrime(num: Int): Boolean = {
+      num > 1 && !(2 to (num - 1)).exists(x => num % x == 0)
+    }
+    if (checkPrime(n)) n #:: genPrime(n + 1)
+    else genPrime(n + 1)
+  }
 }
