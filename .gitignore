@@ -3,10 +3,9 @@
 .bloop
 target
 
-
-
 *.class
 *.log
+*.csv
 
 # sbt specific
 .cache
