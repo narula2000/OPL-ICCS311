@@ -5,7 +5,12 @@ path = "src/mining.rs"
 [package]
 name = "mining"
 version = "0.1.0"
+edition = '2018'
 
 [dependencies]
 rayon = "~1.0"
 chashmap = "~2.2"
+reqwest = "0.10.9"
+tokio = { version = "0.2", features = ["full"] }
+zip = "0.5"
+error-chain = "0.12.4"
