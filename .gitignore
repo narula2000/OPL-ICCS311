@@ -6,6 +6,7 @@ target
 *.class
 *.log
 *.csv
+*.zip
 
 # sbt specific
 .cache
