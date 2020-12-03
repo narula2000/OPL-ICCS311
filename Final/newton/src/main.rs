@@ -19,5 +19,5 @@ fn compute_e() -> f64 {
         }
     }
 
-    return repeat(1.0);
+    return repeat(2.0);
 }
