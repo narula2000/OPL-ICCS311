@@ -55,4 +55,4 @@ website/i18n/*
 project/metals.sbt
 coursier
 
-Project/*
+Project/
