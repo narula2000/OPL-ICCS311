@@ -1,12 +1,8 @@
 fn main() {
-    println!("fib(15) == {}", fib(15));
+    println!("fib(92) == {}", fib(92));
 }
 
 fn fib(n: i32) -> u64 {
-    if n < 0 {
-        panic!("It's negative number: {}", n);
-    }
-
     match n {
         n if n < 0 => panic!("It's negative!!: {}", n),
         1 | 2 => 1,
