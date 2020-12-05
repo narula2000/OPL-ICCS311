@@ -1,6 +1,6 @@
 import math.Ordered
 
-object mergeSort extends App {
+object MergeSort extends App {
   def mergeSort[T](lst: List[T])(implicit order: T => Ordered[T]): List[T] = {
     def merge(left: List[T], right: List[T]): List[T] = {
       (left, right) match {
